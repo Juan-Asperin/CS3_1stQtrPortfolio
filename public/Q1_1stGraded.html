@@ -1,11 +1,11 @@
 <body>
   <h1>This is a header</h1>
-  <p>This is a paragraph.</p>
+  <p id = "p1">This is a paragraph.</p>
   <button id="button1">Button</button>
 
   <script>
     document.getElementById("button1").onclick = function name() {
-      document.write("<p>Juan Asperin</p>");
+      document.getElementById("p1").textContent = "Hi! I am Juan Asperin";
     }
   </script>
 </body>
