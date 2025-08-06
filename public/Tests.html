@@ -1,0 +1,50 @@
+<!-- This is tests to create a note taking website. I'm just trying out new possible things so yea. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <textarea id = "notes" name = "notes" rows = "10" colums = "100" placeholder = "Write your notes..."></textarea>
+    <button id = "submit">Submit</button>
+
+    <script>
+        let notes;
+        let elementCount = 1;
+
+        document.getElementById("submit").onclick = function submit() {
+            elementCount++;
+
+            note = document.createElement('p');
+            note.id = elementID(elementCount);
+            document.body.appendChild(note);
+
+            notes = document.getElementById("notes").value;
+            document.getElementById(elementID(elementCount)).textContent = notes;
+        }
+
+        function elementID (number) {
+            return "div" + number;
+        }
+    </script>
+</body>
+</html>
+
+<!--
+
+Component ideas
+    - Note list display
+    - Note creation
+        - Adding text
+        - Adding longer text
+        - Saving the text into a list
+    - Note editing
+    - Back go main page buttons
+
+-->
