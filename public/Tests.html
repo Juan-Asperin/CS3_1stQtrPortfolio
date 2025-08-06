@@ -16,11 +16,11 @@
 
     <script>
         document.getElementById("submit").onclick = function submit() {
-            let note = document.createElement('div');
+            let note = document.createElement('div'); // Creates div element that contains the note submitted
             note.textContent = document.getElementById("notes").value;
             document.body.appendChild(note);
 
-            let edit = document.createElement('button');
+            let edit = document.createElement('button'); // Creates edit button alongside the note submitted
             edit.textContent = "Edit";
             document.body.appendChild(edit);
 
@@ -28,7 +28,7 @@
                 note.contentEditable = "true";
             }
 
-            document.getElementById("notes").value = "";
+            document.getElementById("notes").value = ""; // Clears text box
         }
 
     </script>
