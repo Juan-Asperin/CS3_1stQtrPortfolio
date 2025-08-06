@@ -20,6 +20,14 @@
             note.textContent = document.getElementById("notes").value;
             document.body.appendChild(note);
 
+            let edit = document.createElement('button');
+            edit.textContent = "Edit";
+            document.body.appendChild(edit);
+
+            edit.onclick = function edit() {
+                note.contentEditable = "true";
+            }
+
             document.getElementById("notes").value = "";
         }
 
