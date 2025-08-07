@@ -15,20 +15,32 @@
     <button id = "submit">Submit</button>
 
     <script>
+        textBox = document.getElementById("notes");
+
         document.getElementById("submit").onclick = function submit() {
             let note = document.createElement('div'); // Creates div element that contains the note submitted
-            note.textContent = document.getElementById("notes").value;
+            note.textContent = textBox.value;
             document.body.appendChild(note);
 
             let edit = document.createElement('button'); // Creates edit button alongside the note submitted
             edit.textContent = "Edit";
             document.body.appendChild(edit);
 
-            edit.onclick = function edit() {
-                note.contentEditable = "true";
+            edit.onclick = function edit_note() {
+                edit.remove();
+                textBox.value = note.textContent;
+
+                save = document.createElement('button'); // Creates save button for the edit
+                save.textContent = "Save";
+                document.body.appendChild(save);
+
+                save.onclick = function save() {
+                    note.textContent = textBox.value;
+                    textBox.value = "";
+                }
             }
 
-            document.getElementById("notes").value = ""; // Clears text box
+            textBox.value = ""; // Clears text box
         }
 
     </script>
