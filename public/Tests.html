@@ -22,11 +22,12 @@
             note.textContent = textBox.value;
             document.body.appendChild(note);
 
-            let edit = document.createElement('button'); // Creates edit button alongside the note submitted
-            edit.textContent = "Edit";
-            document.body.appendChild(edit);
+            function create_edit() {
+                let edit = document.createElement('button'); // Creates edit button alongside the note submitted
+                edit.textContent = "Edit";
+                document.body.appendChild(edit);
 
-            edit.onclick = function edit_note() {
+                edit.onclick = function edit_note() {
                 edit.remove();
                 textBox.value = note.textContent;
 
@@ -34,11 +35,18 @@
                 save.textContent = "Save";
                 document.body.appendChild(save);
 
-                save.onclick = function save() {
+                save.onclick = function save_edit() {
                     note.textContent = textBox.value;
                     textBox.value = "";
+
+                    save.remove();
+                    
+                    create_edit();
                 }
             }
+            }
+
+            create_edit();
 
             textBox.value = ""; // Clears text box
         }
