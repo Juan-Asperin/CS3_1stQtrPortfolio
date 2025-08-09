@@ -23,6 +23,11 @@
     <image src =  "https://i.pinimg.com/originals/8d/4f/d9/8d4fd9b63a08ab6947dffd3f9aaf2668.png" alt = "meowl" style = "width: 15%; height: auto; padding: 40px"></image>
   </section>
 
+  <section class = "w3-container">
+    <textarea id = "notes" name = "notes" rows = "10" colums = "100" placeholder = "Testing jsons..."></textarea>
+    <button id = 'submit'>Submit</button>
+  </section>
+
   <script>
     let counter = 0;
     document.getElementById("button1").onclick = function name() {
@@ -34,6 +39,15 @@
         document.getElementById("p1").textContent = "This is a paragraph";
       }
     }
+
+    const submitButton = document.getElementById("submit");
+    const textBox = document.getElementById("notes").value;
+
+    const jsonSave = [textBox];
+    const fs = require('fs');
+
+    const jsonData = JSON.stringify(jsonSave);
+    
   </script>
 </body>
 </html>
