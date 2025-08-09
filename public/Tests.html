@@ -12,20 +12,21 @@
 </head>
 <body>
     <textarea id = "notes" name = "notes" rows = "10" colums = "100" placeholder = "Write your notes..."></textarea>
-    <button id = "submit">Submit</button>
+    <button id = 'submit'>Submit</button>
 
     <script>
-        textBox = document.getElementById("notes");
+        const textBox = document.getElementById("notes");
+        const submitButton = document.getElementById("submit");
 
         document.getElementById("submit").onclick = function submit() {
-            let note = document.createElement('div'); // Creates div element that contains the note submitted
+            const note = document.createElement('div'); // Creates div element that contains the note submitted
             note.textContent = textBox.value;
             document.body.appendChild(note);
 
             function create_edit() {
-                let edit = document.createElement('button'); // Creates edit button alongside the note submitted
+                const edit = document.createElement('button'); // Creates edit button alongside the note submitted
                 edit.textContent = "Edit";
-                document.body.appendChild(edit);
+                note.insertAdjacentElement("afterend", edit);
 
                 edit.onclick = function edit_note() {
                 edit.remove();
@@ -33,13 +34,16 @@
 
                 save = document.createElement('button'); // Creates save button for the edit
                 save.textContent = "Save";
-                document.body.appendChild(save);
+                textBox.insertAdjacentElement("afterend", save);
+
+                submitButton.remove();
 
                 save.onclick = function save_edit() {
                     note.textContent = textBox.value;
                     textBox.value = "";
 
                     save.remove();
+                    textBox.insertAdjacentElement("afterend", submitButton);
                     
                     create_edit();
                 }
