@@ -18,39 +18,35 @@
         const textBox = document.getElementById("notes");
         const submitButton = document.getElementById("submit");
 
-        document.getElementById("submit").onclick = function submit() {
+        submitButton.onclick = function submit() {
             const note = document.createElement('div'); // Creates div element that contains the note submitted
             note.textContent = textBox.value;
             document.body.appendChild(note);
 
-            function create_edit() {
-                const edit = document.createElement('button'); // Creates edit button alongside the note submitted
-                edit.textContent = "Edit";
-                note.insertAdjacentElement("afterend", edit);
+            const edit = document.createElement('button'); // Creates edit button alongside the note submitted
+            edit.textContent = "Edit";
+            note.insertAdjacentElement("afterend", edit);
 
-                edit.onclick = function edit_note() {
-                edit.remove();
+            edit.onclick = function edit_note() {
+                edit.remove(); // Edit button disappears after it is clicked
                 textBox.value = note.textContent;
 
-                save = document.createElement('button'); // Creates save button for the edit
+                const save = document.createElement('button'); // Creates save button for the edit
                 save.textContent = "Save";
                 textBox.insertAdjacentElement("afterend", save);
 
-                submitButton.remove();
+                submitButton.remove(); // Save replaces submit when editing
 
                 save.onclick = function save_edit() {
                     note.textContent = textBox.value;
                     textBox.value = "";
 
                     save.remove();
-                    textBox.insertAdjacentElement("afterend", submitButton);
+                    textBox.insertAdjacentElement("afterend", submitButton); // Submit button is brought back
                     
-                    create_edit();
+                    note.insertAdjacentElement("afterend", edit);
                 }
             }
-            }
-
-            create_edit();
 
             textBox.value = ""; // Clears text box
         }
