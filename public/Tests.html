@@ -47,35 +47,37 @@
             note.textContent = text;
             noteList.appendChild(note);
 
-            const edit = document.createElement('button'); // Creates edit button alongside the note submitted
-            edit.textContent = "Edit";
-            note.appendChild(edit);
+            const editButton = document.createElement('button'); // Creates edit button alongside the note submitted
+            editButton.textContent = "Edit";
+            note.appendChild(editButton);
 
             const deleteButton = document.createElement('button'); // Creates delete button alongside the note submitted
             deleteButton.textContent = "Delete";
             note.appendChild(deleteButton);
 
-            edit.onclick = function edit_note() {
-                edit.remove(); // Edit button disappears after it is clicked
+            editButton.onclick = function editNote() {
+                editButton.remove(); // Edit button disappears after it is clicked
+                deleteButton.remove();
                 textBox.value = note.textContent;
 
-                const save = document.createElement('button'); // Creates save button for the edit
-                save.textContent = "Save";
-                textBox.insertAdjacentElement("afterend", save);
+                const saveButton = document.createElement('button'); // Creates save button for the edit
+                saveButton.textContent = "Save";
+                textBox.insertAdjacentElement("afterend", saveButton);
 
                 submitButton.remove(); // Save replaces submit when editing
 
-                save.onclick = function save_edit() {
+                saveButton.onclick = function saveEdit() {
                     note.textContent = textBox.value;
                     allNotes[index] = textBox.value; // Saves edits into local storage
                     console.log(allNotes);
                     localStorage.setItem("allNotes", JSON.stringify(allNotes));
                     textBox.value = "";
 
-                    save.remove();
+                    saveButton.remove();
                     textBox.insertAdjacentElement("afterend", submitButton); // Submit button is brought back
                     
-                    note.appendChild(edit);
+                    note.appendChild(editButton);
+                    note.appendChild(deleteButton);
                 }
             }
 
