@@ -13,10 +13,12 @@
 <body>
     <textarea id = "notes" name = "notes" rows = "10" colums = "100" placeholder = "Write your notes..."></textarea>
     <button id = 'submit'>Submit</button>
+    <div id = "noteList"></div>
 
     <script>
         const textBox = document.getElementById("notes");
         const submitButton = document.getElementById("submit");
+        const noteList = document.getElementById("noteList");
 
         let allNotes = JSON.parse(localStorage.getItem("allNotes")) || []; // This array will contain all notes to be saved into the local storage of the computer
 
@@ -32,21 +34,26 @@
         }
 
         function renderNotes() {
+            noteList.textContent = "";
             for (let i = 0; i < allNotes.length; i++) {
-                let element = allNotes[i];
-                singleNoteRender(element);
+                element = allNotes[i]
+                singleNoteRender(element, i);
             }
             
         }
 
-        function singleNoteRender(text) {
+        function singleNoteRender(text, index) {
             const note = document.createElement('div'); // Creates div element that contains the note submitted
             note.textContent = text;
-            document.body.appendChild(note);
+            noteList.appendChild(note);
 
             const edit = document.createElement('button'); // Creates edit button alongside the note submitted
             edit.textContent = "Edit";
-            note.insertAdjacentElement("afterend", edit);
+            note.appendChild(edit);
+
+            const deleteButton = document.createElement('button'); // Creates delete button alongside the note submitted
+            deleteButton.textContent = "Delete";
+            note.appendChild(deleteButton);
 
             edit.onclick = function edit_note() {
                 edit.remove(); // Edit button disappears after it is clicked
@@ -60,13 +67,22 @@
 
                 save.onclick = function save_edit() {
                     note.textContent = textBox.value;
+                    allNotes[index] = textBox.value; // Saves edits into local storage
+                    console.log(allNotes);
+                    localStorage.setItem("allNotes", JSON.stringify(allNotes));
                     textBox.value = "";
 
                     save.remove();
                     textBox.insertAdjacentElement("afterend", submitButton); // Submit button is brought back
                     
-                    note.insertAdjacentElement("afterend", edit);
+                    note.appendChild(edit);
                 }
+            }
+
+            deleteButton.onclick = function deleteNote() {
+                allNotes.splice(index, 1);
+                localStorage.setItem("allNotes", JSON.stringify(allNotes));
+                renderNotes();
             }
         }
 
@@ -85,11 +101,13 @@ Component ideas
     - Note editing
     - Note deleting
     - Back go main page buttons
+    - Delete notes
 
 Saving notes within a different file (no idea if this is even possible)
     - Saving onto local storage
     - Saving edits onto local storage
     - Rendering all of the notes from the local storage
+    - Integrate with editing
     
 Styling the website
 
