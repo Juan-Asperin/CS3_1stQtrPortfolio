@@ -11,7 +11,6 @@
     </style>
 </head>
 <body>
-    <input id = "title" type = "text" name = "title" placeholder = "Title"><br>
     <textarea id = "notes" name = "notes" rows = "10" colums = "100" placeholder = "Write your notes..."></textarea>
     <button id = 'submit'>Submit</button>
 
@@ -19,9 +18,30 @@
         const textBox = document.getElementById("notes");
         const submitButton = document.getElementById("submit");
 
+        let allNotes = JSON.parse(localStorage.getItem("allNotes")) || []; // This array will contain all notes to be saved into the local storage of the computer
+
+        renderNotes();
+
         submitButton.onclick = function submit() {
+            allNotes.push(textBox.value); // Adds notes to a single array
+            console.log(allNotes);
+            localStorage.setItem("allNotes", JSON.stringify(allNotes)) // Saves array into local storage
+
+            textBox.value = ""; // Clears text box
+            renderNotes();
+        }
+
+        function renderNotes() {
+            for (let i = 0; i < allNotes.length; i++) {
+                let element = allNotes[i];
+                singleNoteRender(element);
+            }
+            
+        }
+
+        function singleNoteRender(text) {
             const note = document.createElement('div'); // Creates div element that contains the note submitted
-            note.textContent = textBox.value;
+            note.textContent = text;
             document.body.appendChild(note);
 
             const edit = document.createElement('button'); // Creates edit button alongside the note submitted
@@ -48,8 +68,6 @@
                     note.insertAdjacentElement("afterend", edit);
                 }
             }
-
-            textBox.value = ""; // Clears text box
         }
 
     </script>
@@ -69,6 +87,9 @@ Component ideas
     - Back go main page buttons
 
 Saving notes within a different file (no idea if this is even possible)
+    - Saving onto local storage
+    - Saving edits onto local storage
+    - Rendering all of the notes from the local storage
     
 Styling the website
 
