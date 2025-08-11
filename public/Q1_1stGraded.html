@@ -28,6 +28,9 @@
     <button id = 'submit'>Submit</button>
   </section>
 
+  <button onclick = "newFunction()">New button</button>
+  <p id="demo"></p>
+
   <script>
     let counter = 0;
     document.getElementById("button1").onclick = function name() {
@@ -47,6 +50,17 @@
     const fs = require('fs');
 
     const jsonData = JSON.stringify(jsonSave);
+
+    function newFunction() {
+      var txt;
+      if (confirm("Press a button!")) {
+        txt = "You pressed OK!";
+      }
+      else {
+        txt = "You pressed Cancel!";
+      }
+      document.getElementById("demo").innerHTML = txt;
+    }
     
   </script>
 </body>
