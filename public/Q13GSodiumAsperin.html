@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <h2> Q1 3rd Graded Exercise submitted by Juan Asperin of 9Sodium </h2>
+
+    <div id = "showNumber">Guess the number: ****</div> <br>
+
+    <div>The number is from 1 to 100</div> <br>
+
+    <div>
+        Enter your Guess : 
+        <input id = "guess">
+    </div> <br>
+
+    <button onclick = "checkIt()">Check It</button> <br> <br>
+
+    <div id = "result">Result: </div>
+
+    <script>
+
+        let dNumber = Math.floor(Math.random() * 100) + 1; // generates a number from 1  to 100 when the page loads
+
+        function checkIt() {
+            const guess = Number(document.getElementById("guess").value);
+            const showNumber = document.getElementById("showNumber");
+            const result = document.getElementById("result");
+
+            if (guess > dNumber) {
+                result.innerHTML = "Result: Lower";
+            }
+            else if (guess < dNumber) {
+                result.innerHTML = "Result: Higher"
+            }
+            else {
+                result.innerHTML = "Result: You are correct!";
+                showNumber.innerHTML = "Guess the number: " + dNumber;
+            }
+        }
+    </script>
+
+</body>
+
+</html>
