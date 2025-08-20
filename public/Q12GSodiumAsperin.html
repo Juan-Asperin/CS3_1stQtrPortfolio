@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <h2> Q1 2nd Graded Exercise submitted by Juan Asperin of 9Sodium</h2>
+
+    <div>
+        Meal Price:
+        <input id = "mealPrice">
+    </div>
+
+    <div>
+        Tip:
+        <input id = "tip">
+    </div>
+
+    <div>
+        Service Charge:
+        <input id = "serviceCharge">
+    </div>
+
+    <br>
+    <button onclick = "totalMeal()">Accept Input</button>
+
+    <br> <br>
+    <div id = "totalMeal">Total Meal: </div>
+
+    <br> <br>
+    <p>Sources: </p>
+    <p>W3Schools.com. (n.d.). https://www.w3schools.com/jsref/jsref_tofixed.asp</p>
+
+    <script>
+        function totalMeal() {
+            const mealPrice = Number(document.getElementById("mealPrice").value);
+            const tip = Number(document.getElementById("tip").value);
+            const serviceCharge = Number(document.getElementById("serviceCharge").value);
+            
+            let totalMeal;
+
+            totalMeal = mealPrice + tip + (serviceCharge / 100 * mealPrice);
+
+            document.getElementById("totalMeal").innerHTML = "Total Meal: " + totalMeal.toFixed(2);
+        }
+    </script>
+    
+</body>
+</html>
