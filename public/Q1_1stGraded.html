@@ -5,6 +5,21 @@
     .test {
       color: rgb(139, 64, 64);
     }
+    .custom-textarea {
+      width: 100%;
+      min-height: 80px;
+      font-family: "Helvetica", monospace; /* change font */
+      font-size: 1rem;                        /* change size */
+      font-weight: 400;                       /* weight */
+      line-height: 1.5;                       /* spacing */
+      color: #333;                            /* text color */
+      background-color: #fafafa;              /* background */
+      border: none;
+      padding: 0.75rem;
+      resize: vertical;
+      outline: none;                       /* let it resize vertically only */
+    }
+
   </style>
 </head>
 
@@ -23,13 +38,19 @@
     <image src =  "https://i.pinimg.com/originals/8d/4f/d9/8d4fd9b63a08ab6947dffd3f9aaf2668.png" alt = "meowl" style = "width: 15%; height: auto; padding: 40px"></image>
   </section>
 
-  <section class = "w3-container">
-    <textarea id = "notes" name = "notes" rows = "10" colums = "100" placeholder = "Testing jsons..."></textarea>
-    <button id = 'submit'>Submit</button>
-  </section>
+  <br>
+  <button onclick="document.getElementById('myDialog').showModal()">Open Modal Dialog</button>
 
-  <button onclick = "newFunction()">New button</button>
-  <p id="demo"></p>
+  <dialog id="myDialog">
+    <h2>Welcome to the Dialog!</h2>
+    <p>This is a modal dialog box.</p>
+    <form method="dialog">
+      <button type="submit">Close</button>
+    </form>
+  </dialog>
+
+  <br><br>
+  <textarea class="custom-textarea"></textarea>
 
   <script>
     let counter = 0;
@@ -42,26 +63,6 @@
         document.getElementById("p1").textContent = "This is a paragraph";
       }
     }
-
-    const submitButton = document.getElementById("submit");
-    const textBox = document.getElementById("notes").value;
-
-    const jsonSave = [textBox];
-    const fs = require('fs');
-
-    const jsonData = JSON.stringify(jsonSave);
-
-    function newFunction() {
-      var txt;
-      if (confirm("Press a button!")) {
-        txt = "You pressed OK!";
-      }
-      else {
-        txt = "You pressed Cancel!";
-      }
-      document.getElementById("demo").innerHTML = txt;
-    }
-    
   </script>
 </body>
 </html>
