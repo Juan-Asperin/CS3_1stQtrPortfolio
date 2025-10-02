@@ -7,3 +7,6 @@
 .noteCard {
     font-family: 'Helvetica';
 }
+.options{
+    white-space: nowrap;
+}
