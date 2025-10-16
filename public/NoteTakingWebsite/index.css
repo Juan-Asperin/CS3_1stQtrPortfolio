@@ -7,6 +7,10 @@
 .noteCard {
     font-family: 'Helvetica';
 }
-.options{
-    white-space: nowrap;
+.header {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    padding: 10px;
+    background-color:bisque;
 }
