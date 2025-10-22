@@ -1,0 +1,91 @@
+* {
+    font-family: 'sans-serif', 'Helvetica', 'Arial';
+    padding: 10px;
+    border: solid, 1px white;
+    border-radius: 10px;
+    color: white;
+}
+
+body {
+    background-color: black;
+    background-image: linear-gradient(black, rgba(26, 197, 219, 0.411))
+}
+
+header, footer {
+    padding: 10px;
+    text-align: center;
+}
+
+#main-title {
+    text-transform: uppercase;
+    word-spacing: 10px;
+    letter-spacing: -3px;
+    margin-bottom: 0;
+    text-shadow: 2px 2px 5px yellow;
+}
+
+.intro {
+    font-size: 1.5em;
+    margin-top: none;
+    text-decoration: underline;
+}
+
+section img:first-child {
+    display: block;
+    width: 25vw;
+    height: 25vh;
+    margin: auto;
+}
+
+.container img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    float: left;
+}
+
+.container ul {
+    list-style-type: none; /* to remove the bullets*/
+    clear: left; /* to remove the effect of float:left */
+}  
+
+a[target="_blank"] {
+    text-decoration: none;
+    color: aqua;
+    border: solid, 3px, aqua;
+    border-radius: 10px;
+    text-shadow: 2px 2px 5px aqua;
+}
+
+a[href="/internal-page"] {
+    text-decoration: none;
+    color: yellow;
+    border: solid, 3px, yellow;
+    border-radius: 10px;
+    text-shadow: 2px 2px 5px yellow;
+}
+
+a:hover{
+    text-decoration: none;
+    color: white;
+    border: solid, 3px, white;
+    border-radius: 10px;
+    text-shadow: 2px 2px 5px white;
+}
+
+/* extra CSS */
+.container ul {
+    list-style-type: none; /* removes bullets */
+    clear: left; /* removes effect of float:left */
+    padding: 0; /* removes the spaces surrounding the li/s */
+}
+
+.container ul li {
+    width: 150px;
+    padding: 5px;
+    text-align: center;
+    display: inline-block;
+    border: solid, 3px, aqua;
+    border-radius: 0px 25px;
+    color: aqua;
+}
