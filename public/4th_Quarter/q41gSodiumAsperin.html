@@ -46,13 +46,14 @@
 </body>
 
 <script>
+    let selectedRating = 0;
+
     const starButtons = [];
     for(let i = 1; i <= 5; i++) {
         starButtons.push(document.querySelector(`button.star[data-value="${i}"]`));
     }
 
-    let selectedRating = 0;
-
+    // Selecting star rating
     starButtons.forEach(button => {
         button.addEventListener('click', () => {
             selectedRating = button.getAttribute('data-value');
@@ -71,6 +72,7 @@
         });
     }
 
+    // Adding a new movie to local storage 
     const movieForm = document.getElementById('movieForm');
     movieForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -89,10 +91,11 @@
         selectedRating = 0;
         updateStars();
 
-        displayMovies();
+        renderMovies();
     });
 
-    function displayMovies() {
+    // Rendering movies from local storage
+    function renderMovies() {
         const moviesContainer = document.getElementById('moviesContainer');
         moviesContainer.innerHTML = '';
         const movies = JSON.parse(localStorage.getItem('movies')) || [];
@@ -120,6 +123,6 @@
 
     // localStorage.clear();
 
-    displayMovies();
+    renderMovies();
 </script>
 </html>
