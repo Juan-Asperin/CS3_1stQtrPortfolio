@@ -76,16 +76,38 @@
     const movieForm = document.getElementById('movieForm');
     movieForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        
+        if (selectedRating === 0) {
+            alert('Please select a rating before submitting.');
+            return;
+        }
+        
         const title = document.getElementById('title').value;
         const year = document.getElementById('year').value;
         const genre = document.getElementById('genre').value;
         
         const KEY = 'movies';
-        const newMovie = { title, year, genre, totalRating: selectedRating };
+        const newMovie = new Movie(title, year, genre, selectedRating);
         let movies = JSON.parse(localStorage.getItem(KEY)) || [];
-        movies.push(newMovie);
-        console.log(movies);
-        localStorage.setItem(KEY, JSON.stringify(movies));
+
+        if(movies.find(movie => movie.title.toLowerCase() === title.toLowerCase())) {
+            movies = movies.map(movie => {
+                if(movie.title.toLowerCase() === title.toLowerCase()) {
+                    let editMovie = new Movie(movie.title, year, genre, selectedRating);
+                    editMovie.totalRating = Number(movie.totalRating) + Number(selectedRating);
+                    editMovie.ratingCount = movie.ratingCount + 1;
+                    return editMovie;
+                }
+                return movie;
+            });
+            console.log(movies);
+            localStorage.setItem(KEY, JSON.stringify(movies));
+        }
+        else {
+            movies.push(newMovie);
+            console.log(movies);
+            localStorage.setItem(KEY, JSON.stringify(movies));
+        }
 
         movieForm.reset();
         selectedRating = 0;
@@ -99,25 +121,50 @@
         const moviesContainer = document.getElementById('moviesContainer');
         moviesContainer.innerHTML = '';
         const movies = JSON.parse(localStorage.getItem('movies')) || [];
+        let displayRating;
 
         if(movies.length === 0) {
             moviesContainer.textContent = 'No movies added yet.';
         }
         else {
-            movies.forEach(movie => {
+            movies.forEach((movie, index) => {
+                displayRating = Math.round(movie.totalRating / movie.ratingCount);
                 const movieElement = document.createElement('div');
                 movieElement.innerHTML = `
                     <strong>${movie.title}</strong> (${movie.year}) - ${movie.genre}
-                    <span style="float: right;">
+                    <span style="margin-left: auto;">
                         <strong>Rating:</strong>
                         <span style="color: gold;">
-                            ${'★'.repeat(movie.totalRating)}${'☆'.repeat(5 - movie.totalRating)}
+                            ${'★'.repeat(displayRating)}${'☆'.repeat(5 - displayRating)}
                         </span>
                     </span>`;
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = "Delete";
+                deleteButton.onclick = function deleteNote() {
+                    if(confirm(`Are you sure you want to delete "${movie.title}"?`)) {
+                        movies.splice(index, 1);
+                        localStorage.setItem("movies", JSON.stringify(movies));
+                        console.log(movies);
+                        renderMovies();
+                    }
+                }
+                
+                movieElement.appendChild(deleteButton);
                 movieElement.classList.add('movie-item');
 
                 moviesContainer.appendChild(movieElement);
             });
+        }
+    }
+
+    class Movie {
+        constructor(title, year, genre, totalRating) {
+            this.title = title;
+            this.year = year;
+            this.genre = genre;
+            this.totalRating = totalRating;
+            this.ratingCount = 1;
         }
     }
 

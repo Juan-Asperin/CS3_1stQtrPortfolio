@@ -72,6 +72,19 @@ button {
     transition: background-color 0.3s ease, transform 0.1s ease;
 }
 
+button:not([type]) {
+    padding: 8px;
+    font-size: 12px;
+    background-color: #2196F3;
+    color: white;
+}
+
+button:not([type]):hover {
+    background-color: #0b7dda;
+    transform: translateY(-2px);
+}
+
+
 button[type="submit"] {
     background-color: #4CAF50;
     color: white;
@@ -103,4 +116,6 @@ button[type="submit"]:hover {
     margin-bottom: 10px;
     background-color: inherit;
     transition: background-color 0.3s ease;
+    gap: 8px;
+    display: flex;
 }
